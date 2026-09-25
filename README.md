@@ -75,7 +75,17 @@ docker compose up --build
 
 ### 3. Log in
 
-Open **http://localhost:8000**. On first startup the application creates the SQLite database (`database/db_oceens.db`) and fills it with a demo data set. In `dev` mode, `/login` leads to `/dev/login`, which lists the database's users by role: click one to log in as that user. `antoine.gademer@epf.fr` is an admin in the demo data.
+Open **http://localhost:8000**. On first startup the application creates the SQLite database (`database/db_oceens.db`) and fills it with a demo data set. In `dev` mode, `/login` leads to the development login (`/dev/login`), which lists the database's users by role: click one to log in as that user. For each role, the demo data has one user who holds only that role:
+
+| Role | User |
+|------|------|
+| `admin` | `arnaud.jousset@epf.fr` |
+| `program_manager:MDAI5` | `oceens.program-manager@epf.fr` |
+| `facilitator:MDAI5` | `oceens.facilitator@epf.fr` |
+| `campus_manager:Montpellier` | `oceens.campus-manager@epf.fr` |
+| `student` (no role row) | `bob.leponge@epfedu.fr` |
+
+`antoine.gademer@epf.fr` holds both `admin` and `program_manager:MDAI5`. Demo users are only inserted into an empty database: to get new ones, delete `database/db_oceens.db` and restart.
 
 The application runs without an LLM key: everything works except free-text summaries, which need a key and the summaries daemon (see [LLM providers](#llm-providers-free-text-summaries)).
 
