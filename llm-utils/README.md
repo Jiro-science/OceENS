@@ -1,39 +1,25 @@
-# LLM Utilities for OceENS
+# LLM Utilities for OcéEns
 
-Outils annexes autour des fournisseurs LLM du projet OceENS.
+Side tools around OcéEns's LLM providers.
 
-## Le suivi des coûts a été déplacé dans l'application
+## Cost tracking moved into the application
 
-Ce dossier contenait `token-counting/`, qui estimait le nombre de tokens du
-**code source du dépôt** (`*.py`) et le multipliait par un tarif codé en dur.
-Cette mesure ne disait rien de ce que l'application dépense réellement : les
-synthèses de verbatims consomment des tokens de *prompts et de réponses*, pas
-de fichiers Python, et l'approximation « 4 caractères = 1 token » ne
-correspond au tokenizer d'aucun fournisseur.
+This folder used to contain `token-counting/`, which estimated the number of
+tokens of the **repository's source code** (`*.py`) and multiplied it by a
+hard-coded price. That measurement said nothing about what the application
+actually spends: free-text summaries consume *prompt and response* tokens, not
+Python files, and the "4 characters = 1 token" approximation matches no
+provider's tokenizer.
 
-Le suivi des coûts est désormais **mesuré, pas estimé**, et intégré à
-l'application :
-
-| Où | Quoi |
-| --- | --- |
-| `services/llm_costs.py` | Calcul du coût à partir des tokens réellement consommés |
-| `/backend/llm/prices` | Grille tarifaire par modèle, éditable (admin) |
-| `/backend/llm/costs` | Coût global, détaillé par sondage et par modèle (admin) |
-| Bouton 💰 sur une ligne de sondage | Coût des synthèses de ce sondage |
-
-Le daemon enregistre les compteurs renvoyés par le fournisseur
-(`Summary.input_tokens` / `output_tokens` / `model_used`) au moment de la
-génération : c'est la seule occasion de les capturer, aucune API ne permet de
-les redemander après coup.
-
-Voir la section « Coût des synthèses » du README racine.
+Costs are now measured from the tokens each provider reports, inside the
+application: see the "Summary costs" section of the root README.
 
 ---
 
-## Utilitaires à venir
+## Upcoming utilities
 
-Ce dossier reste destiné aux outils LLM hors application :
+This folder remains meant for LLM tools outside the application:
 
-- gestion et versionnage de prompts ;
-- évaluation comparative de modèles ;
-- scripts de bascule entre fournisseurs.
+- prompt management and versioning;
+- comparative model evaluation;
+- provider switch-over scripts.

@@ -7,6 +7,10 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    environment:
+      # LOCAL_DATABASE_DIR in .env is a host path, used for the volume below;
+      # inside the container the database is always the mounted folder.
+      LOCAL_DATABASE_DIR: /app/database
     volumes:
       - ${LOCAL_DATABASE_DIR:-./database}:/app/database
       - ./import:/app/import
