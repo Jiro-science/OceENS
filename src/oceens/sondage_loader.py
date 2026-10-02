@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Optional
 
 from sqlmodel import Session, select
 
+from oceens.core.auth import _build_msal_app
 from oceens.core.database import engine
 from oceens.models import Answer, Module, Option, Program, Question, Section, Submission, Survey
 
